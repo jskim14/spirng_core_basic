@@ -9,8 +9,15 @@ import hello.core.member.MemoryMemberRepository;
 public class OrderServiceImple implements OrderService{
 
     // 찾아야 할 때 필요한 정보들
-    private final MemberRepository memberRepository = new MemoryMemberRepository();
-    private final DiscountPolicy discountPolicy = new FixDiscountPolicy();
+    private final MemberRepository memberRepository;
+
+    private final DiscountPolicy discountPolicy; // = new FixDiscountPolicy();
+//    private DiscountPolicy discountPolicy; // 이 상태로는 null
+
+public OrderServiceImple(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+    this.memberRepository = memberRepository;
+    this.discountPolicy = discountPolicy;
+}
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
